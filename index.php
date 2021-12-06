@@ -11,7 +11,10 @@
     <div class="container">
         <div class="wrapper">
             <div class="layer">
-                <div class="head"><h2>Score: <span></span></h2></div>
+                <div class="head">
+                    <h2 class="score">Score: <span id="score"></span></h2>
+                    <h2 class="time">Time: <span id="time"></span></h2>
+                </div>
             </div>
             <canvas class="mycanvas"></canvas>
         </div>

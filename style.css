@@ -23,4 +23,11 @@
 }
 .layer .head {
     padding: 5px;
+    display: flex;
+}
+.layer .head .score {
+    flex: .4;
+}
+.layer .head .time {
+    flex: .6;
 }

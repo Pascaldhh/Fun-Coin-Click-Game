@@ -1,6 +1,7 @@
 const canvas = document.querySelector('.mycanvas');
 const ctx = canvas.getContext('2d');
-const counterDiv = document.querySelector('.layer .head span');
+const counterDiv = document.querySelector('.layer .head #score');
+const timerDiv = document.querySelector('.layer .head #time');
 
 canvas.width = '500';
 canvas.height = '500';
@@ -21,14 +22,7 @@ canvas.addEventListener('mousedown', e => {
     {
         ctx.clearRect(coinStats.x, coinStats.y, coinStats.width, coinStats.height);
         counter++;
-        $.ajax({
-            type : "POST", 
-            url  : "validation_score.php",  
-            data : { score: counter },
-            success: function(data){  
-                counterDiv.innerHTML = data;
-            }
-        });
+        validationCoin();
         randomSpawn();
     }
 });
@@ -47,11 +41,30 @@ function randomSpawn()
 }
 randomSpawn();
 
-$.ajax({
-    type : "POST", 
-    url  : "validation_score.php",  
-    data : { score: counter },
-    success: function(data){  
-        counterDiv.innerHTML = data;
-    }
-});
+
+
+function validationCoin()
+{
+    $.ajax({
+        type : "POST", 
+        url  : "validation_score.php",  
+        data : { score: counter },
+        success: function(data){  
+            counterDiv.innerHTML = data;
+        }
+    });
+}
+validationCoin();
+
+function gameTimer()
+{
+    let time = 60;
+    timerDiv.innerHTML = time;
+    let interval = setInterval(() => {
+        time--;
+        timerDiv.innerHTML = time;
+        if(time == 0) clearInterval(interval);
+    }, 1000);
+    
+}
+gameTimer();
