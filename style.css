@@ -1,0 +1,26 @@
+*, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+}
+.container {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.mycanvas {
+    border: 2px solid black;
+}
+.wrapper {
+    position: relative;
+}
+.layer {
+    position: absolute;
+    z-index: -1;
+    inset: 0;
+    user-select: none;
+}
+.layer .head {
+    padding: 5px;
+}
