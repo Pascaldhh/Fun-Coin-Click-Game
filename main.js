@@ -6,7 +6,6 @@ canvas.width = '500';
 canvas.height = '500';
 
 let counter = 0;
-counterDiv.innerHTML = counter;
 
 let coinStats = {
     x: 0,
@@ -14,8 +13,6 @@ let coinStats = {
     width: 40,
     height: 40,
 }
-const coin = new Image();
-coin.src = "coin.png";
 
 canvas.addEventListener('mousedown', e => {
     x = e.offsetX;
@@ -38,9 +35,15 @@ canvas.addEventListener('mousedown', e => {
 
 function randomSpawn()
 {
-    coinStats.x = Math.floor(Math.random() * (canvas.width - 1) + 1);
-    coinStats.y = Math.floor(Math.random() * (canvas.height - 1) + 1);
-    ctx.drawImage(coin, coinStats.x, coinStats.y, coinStats.width, coinStats.height);
+    const coin = new Image();
+    coin.src = "coin.png";
+
+    coin.onload = function() {
+        coinStats.x = Math.floor(Math.random() * (canvas.width - 1) + 1);
+        coinStats.y = Math.floor(Math.random() * (canvas.height - 1) + 1);
+        ctx.drawImage(coin, coinStats.x, coinStats.y, coinStats.width, coinStats.height);
+    }
+    
 }
 randomSpawn();
 
