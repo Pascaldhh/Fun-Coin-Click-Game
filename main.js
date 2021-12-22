@@ -39,32 +39,52 @@ function randomSpawn()
     }
     
 }
-randomSpawn();
 
 
 
-function validationCoin()
+function validationCoin(varr = counterDiv)
 {
     $.ajax({
         type : "POST", 
         url  : "validation_score.php",  
         data : { score: counter },
         success: function(data){  
-            counterDiv.innerHTML = data;
+            varr.innerHTML = data;
         }
     });
 }
 validationCoin();
 
+let time = 60;
+timerDiv.innerHTML = time;
+const layer3 = document.querySelector('.layer3');
+const scoreEnd = document.querySelector('.layer3 p span');
 function gameTimer()
 {
-    let time = 60;
     timerDiv.innerHTML = time;
     let interval = setInterval(() => {
         time--;
         timerDiv.innerHTML = time;
-        if(time == 0) clearInterval(interval);
-    }, 1000);
+        if(time == 0) 
+        {
+            clearInterval(interval);
+            layer3.style.display = 'flex';
+            validationCoin(scoreEnd);
+        }
+    }, 100);
     
 }
-gameTimer();
+
+const start_btn = document.querySelector('#start-btn');
+const layer2 = document.querySelector('.layer2');
+start_btn.addEventListener('click', () => {
+    layer2.style.display = 'none';
+    time = 60;
+    gameTimer();
+    randomSpawn();
+});
+
+document.querySelector('#restart').addEventListener('click', () => {
+    layer2.style.display = 'flex';
+    ctx.clearRect(0,0,canvas.width,canvas.height);
+});
